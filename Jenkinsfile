@@ -25,7 +25,7 @@ pipeline{
 }
          stage('clone'){
              steps{
-                checkout ([$class: 'GitSCM', branches: [[name: '${params.BRANCH}']], userRemoteConfigs: [[url: 'https://github.com/dev-lx/GoProject.git']]])
+                checkout ([$class: 'GitSCM', branches: [[name: "${params.BRANCH}"]], userRemoteConfigs: [[url: 'https://github.com/dev-lx/GoProject.git']]])
 }
 }
          stage ('build'){
