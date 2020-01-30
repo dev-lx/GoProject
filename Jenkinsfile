@@ -2,8 +2,8 @@ pipeline{
     //agent { label 'slav01' }
      agent any
      parameters {
-        //  choice(choices: [ 'master', 'dev', 'stage' ], description: 'Select branch for deployment', name: 'BRANCH_NAME')
-        gitParameter branchFilter: 'origin/(.*)', defaultValue: 'master', name: 'BRANCH'
+        choice(choices: [ 'master', 'dev', 'stage' ], description: 'Select deployment branch', name: 'BRANCH')
+        // gitParameter branchFilter: 'origin/(.*)', defaultValue: 'master', name: 'BRANCH'
 }
      environment{
         dockerImage = ''
@@ -23,6 +23,11 @@ pipeline{
             steps{
                 step([$class: 'WsCleanup'])
 }
+}
+         stage('EchoChoice'){
+             steps{
+                 echo ${params.BRANCH}
+             }
 }
          stage('clone'){
              steps{
