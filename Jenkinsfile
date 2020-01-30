@@ -2,7 +2,8 @@ pipeline{
     //agent { label 'slav01' }
      agent any
      parameters {
-         gitParameter branchFilter: 'origin/(.*)', defaultValue: 'master', name: 'BRANCH'
+         choice(choices: [ 'master', 'dev', 'stage'], description: 'Select branch for deployment', name: 'BRANCH_NAME')
+        //  gitParameter branchFilter: 'origin/(.*)', defaultValue: 'master', name: 'BRANCH'
 }
      environment{
         dockerImage = ''
@@ -25,7 +26,7 @@ pipeline{
 }
          stage('clone'){
              steps{
-                checkout ([$class: 'GitSCM', branches: [[name: "${params.BRANCH}"]], userRemoteConfigs: [[url: 'https://github.com/dev-lx/GoProject.git']]])
+                checkout ([$class: 'GitSCM', branches: [[name: {params.BRANCH_NAME} ]], userRemoteConfigs: [[url: 'https://github.com/dev-lx/GoProject.git']]])
 }
 }
          stage ('build'){
