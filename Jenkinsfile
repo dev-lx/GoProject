@@ -2,7 +2,7 @@ pipeline{
     //agent { label 'slav01' }
      agent any
      parameters {
-         gitParameter branchFilter= 'origin/(.*)', defaultValue= 'master', name= 'BRANCH'
+         gitParameter branchFilter: 'origin/(.*)', defaultValue: 'master', name: 'BRANCH'
 }
      environment{
         dockerImage = ''
