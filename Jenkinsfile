@@ -39,7 +39,6 @@ pipeline{
                 script{
                     withEnv(["PATH=PATH=$PATH:/usr/local/go/bin", "GOPATH=${JENKINS_HOME}/jobs/${JOB_NAME}/builds/${BUILD_ID}"]) {
                         sh 'go version'
-                        sh 'go build'
                         sh 'ls'
 }
 }
