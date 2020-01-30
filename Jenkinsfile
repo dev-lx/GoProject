@@ -34,11 +34,17 @@ pipeline{
                 checkout ([$class: 'GitSCM', branches: [[name: "*/${params.BRANCH}" ]], userRemoteConfigs: [[url: 'https://github.com/dev-lx/GoProject.git']]])
 }
 }
+         stage('prebuild'){
+             withEnv(["GOPATH=${JENKINS_HOME}/jobs/${JOB_NAME}/builds/${BUILD_ID}"]) {
+                 sh 'go version'
+                 sh 'go build'
+                 sh 'ls'
+   }
+         }
          stage ('build'){
              steps{
                 script{
-                   sh 'go version'
-                   sh 'go build && ./main'
+                   echo "Prebuild is done"
                   
                 }
              }
