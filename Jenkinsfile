@@ -37,10 +37,11 @@ pipeline{
          stage('prebuild'){
              steps{
                 script{
-                    withEnv(["PATH=PATH=$PATH:/usr/local/go/bin", "GOPATH=${JENKINS_HOME}/jobs/${JOB_NAME}/builds/${BUILD_ID}"]) {
+                    withEnv(["PATH=PATH=$PATH:/usr/local/go/bin", "GOPATH=${JENKINS_HOME}/workspace/${JOB_NAME}"]) {
                         sh 'go version'
                         sh 'pwd'
                         sh 'ls'
+                        sh 'go build'
 }
 }
 }
