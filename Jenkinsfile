@@ -26,7 +26,7 @@ pipeline{
 }
          stage('EchoChoice'){
              steps{
-                 echo ${params.BRANCH}
+                 echo "${params.BRANCH}"
              }
 }
          stage('clone'){
