@@ -1,6 +1,9 @@
 pipeline{
     //agent { label 'slav01' }
      agent any
+     parameters {
+         gitParameter branchFilter: 'origin/(.*)', defaultValue: 'master', name: 'BRANCH'
+}
      environment{
         dockerImage = ''
         registryurl = 'alwaysavail/gitops'
@@ -22,7 +25,7 @@ pipeline{
 }
          stage('clone'){
              steps{
-                checkout ([$class: 'GitSCM', branches: [[name: '*/master']], userRemoteConfigs: [[url: 'https://github.com/Aliabbask08/GitopsDemo.git']]])
+                checkout ([$class: 'GitSCM', branches: [[name: '${params.BRANCH}']], userRemoteConfigs: [[url: 'https://github.com/dev-lx/GoProject.git']]])
 }
 }
          stage ('build'){
