@@ -35,12 +35,16 @@ pipeline{
 }
 }
          stage('prebuild'){
-             withEnv(["GOPATH=${JENKINS_HOME}/jobs/${JOB_NAME}/builds/${BUILD_ID}"]) {
-                 sh 'go version'
-                 sh 'go build'
-                 sh 'ls'
-   }
-         }
+             steps{
+                script{
+                    withEnv(["GOPATH=${JENKINS_HOME}/jobs/${JOB_NAME}/builds/${BUILD_ID}"]) {
+                        sh 'go version'
+                        sh 'go build'
+                        sh 'ls'
+}
+}
+}
+}
          stage ('build'){
              steps{
                 script{
